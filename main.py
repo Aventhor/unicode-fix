@@ -19,12 +19,12 @@ class Main:
         self.lc.pack(padx=12, side='left')
     
 def redirectToProfile(event):
-    webbrowser.open_new(r"https://github.com/Aventhor")
+    webbrowser.open_new(r"https://github.com/Aventhor/unicode-fix")
     
 
 root = tkinter.Tk()
 root.title('System Files Changer')
-root.iconbitmap('assets\\favicon.ico')
+root.iconbitmap('F:\\Training\\Python\\SystemFilesChanger\\assets\\favicon.ico')
 root.geometry('300x230')
 root.resizable(False, False)
 main = Main(root)
