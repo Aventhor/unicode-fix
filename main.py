@@ -24,7 +24,6 @@ def redirectToProfile(event):
 
 root = tkinter.Tk()
 root.title('System Files Changer')
-root.iconbitmap('F:\\Training\\Python\\SystemFilesChanger\\assets\\favicon.ico')
 root.geometry('300x230')
 root.resizable(False, False)
 main = Main(root)
