@@ -40,28 +40,33 @@ class Functional:
 
 
     def replaceFiles(self):
+        success = True
         temp = os.path.join(self.desktopPath, 'temp\\')
         try: 
             os.makedirs(temp)
             print('Temporary directory is created: ' + temp)
         except FileExistsError:
-            print('Directory {0} already exist!'.format(temp))
+            print('Directory {0} already exists!'.format(temp))
+        try:
+            shutil.move(self.getPath() + self.sysFiles[0], temp)
+            subject = temp + self.sysFiles[0]
+            print('File {0} was moved in {1} directory'.format(self.sysFiles[0] ,temp))
 
-        shutil.move(self.getPath() + self.sysFiles[0], temp)
-        subject = temp + self.sysFiles[0]
-        print('File {0} was moved in {1} directory'.format(self.sysFiles[0] ,temp))
+            shutil.move(self.getPath() + self.sysFiles[1], temp + 'C_1252.bak')
+            print('File {0} was moved in {1} directory as C_1252.bak'.format(self.sysFiles[1], temp))
 
-        shutil.move(self.getPath() + self.sysFiles[1], temp + 'C_1252.bak')
-        print('File {0} was moved in {1} directory as C_1252.bak'.format(self.sysFiles[1], temp))
+            shutil.copy(subject, temp + self.sysFiles[1])
+            copy = temp + self.sysFiles[1]
+            print('Copy of {0} was created as {1} in {2}'.format(self.sysFiles[0], self.sysFiles[1], temp))
 
-        shutil.copy(subject, temp + self.sysFiles[1])
-        copy = temp + self.sysFiles[1]
-        print('Copy of {0} was created as {1} in {2}'.format(self.sysFiles[0], self.sysFiles[1], temp))
-
-        try: 
             shutil.move(subject, self.getPath() + self.sysFiles[0])
             print("File {0} was moved in {1} directory from {2}".format(self.sysFiles[0], self.getPath(), temp))
             shutil.move(temp + self.sysFiles[1], self.getPath() + self.sysFiles[1])
             print("File {0} was moved in {1} directory from {2}".format(self.sysFiles[1], self.getPath(), temp))
         except PermissionError:
-            messagebox.showerror('Ошибка', 'Нет доступа!')
+            messagebox.showerror('Ошибка', 'Отказано в доступе!')
+            print('Permission Error. Run the programm as administrator!')
+            success = False
+        if success:
+            print('Operation completed successfully. Reboot your computer!')
+            messagebox.showinfo('Уведомление', 'Замена файлов успешно произведена. Для применения изменений перезагрузите компьютер!')
