@@ -1,2 +1,2 @@
 # unicode-fix
-Replacement C_1252.NLS to C_1251.NLS
+Программа для автоматической замены файлов C_1251.NLS и C_1252.NLS
